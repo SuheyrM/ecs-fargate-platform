@@ -1,0 +1,17 @@
+FROM twinproduction/gatus:latest AS gatus
+
+FROM alpine:3.20
+
+RUN apk add --no-cache bash curl jq python3 py3-pip && \
+    pip3 install --no-cache-dir awscli
+
+WORKDIR /app
+
+COPY --from=gatus /usr/bin/gatus /usr/bin/gatus
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 8080
+
+ENTRYPOINT ["/entrypoint.sh"]

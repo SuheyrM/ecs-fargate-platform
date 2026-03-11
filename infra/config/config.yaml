@@ -1,0 +1,19 @@
+storage:
+  type: memory
+
+ui:
+  title: "Suheyr Status"
+  description: "Gatus monitoring platform on ECS Fargate"
+
+endpoints:
+  - name: suheyr-homepage
+    url: "https://suheyr.com"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: google
+    url: "https://www.google.com"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
