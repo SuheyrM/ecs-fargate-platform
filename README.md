@@ -12,6 +12,7 @@
 ![IAM](https://img.shields.io/badge/IAM-6B7280?style=flat-square)
 ![Least Privilege](https://img.shields.io/badge/Least%20Privilege-EF4444?style=flat-square)
 
+## Architecture Diagram
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/84dfc0ec-9001-4b2c-b1f2-e0c6176383ac" />
 
 ---
