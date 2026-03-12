@@ -191,7 +191,7 @@ The Gatus platform monitors several endpoints:
 --
 ## Future Improvements
 
-- Possible enhancements:
+Possible enhancements:
 - Blue/Green deployments
 - ECS auto-scaling policies
 - WAF protection on ALB
