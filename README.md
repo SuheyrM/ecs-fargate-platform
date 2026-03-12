@@ -17,7 +17,10 @@
 ---
 ## Overview 
 
-A secure container platform on AWS powered by ECS Fargate, Terraform, and GitHub Actions. It emphasises infrastructure architecture, security-first design, and automated delivery pipelines, prioritising clarity, safe deployments, and operational integrity.
+This project demonstrates a secure, container-based monitoring platform deployed on AWS.
+Infrastructure is defined using Terraform and runs on ECS Fargate behind an Application Load Balancer with HTTPS enabled via ACM.  
+The platform uses GitHub Actions for automated CI/CD with OIDC-based authentication, eliminating the need for long-lived AWS credentials.
+The goal of this project is to showcase real-world DevOps practices including infrastructure-as-code, secure deployments, and production-style AWS architecture.
 
 ----
 ## Repository Structure
@@ -66,13 +69,19 @@ ecs-fargate-platform
 ├─ .gitignore
 ├─ LICENSE
 └─ README.md
+
+infra/           Terraform infrastructure
+app/             Containerised Gatus application
+.github/         CI/CD pipeline (GitHub Actions)
+assets/          Screenshots and architecture diagrams
+
 ```
 ## Design 
 - Infrastructure defined as code
-- Secure CI/CD using OIDC, eliminating need for long-lived credentials
-= Principle of least privilege applied consistently
-= Deployments based on immutable container images
-= Explicit availability and cost tradeoffs
+- Secure CI/CD using OIDC, eliminating long-lived credentials
+- Principle of least privilege applied consistently
+- Deployments based on immutable container images
+- Explicit availability and cost trade-offs
 
 -----
 ## Architecture Overview
@@ -91,7 +100,10 @@ The platform is deployed within a custom VPC spanning two Availability Zones and
 ----
 ## CI/CD Workflow
 
-The platform uses GitHub Actions with OpenID Connect (OIDC) to securely deploy containers without storing AWS credentials.
+The platform uses GitHub Actions with OpenID Connect (OIDC) to securely deploy containers to AWS without storing long-lived credentials.
+
+## Deployment Flow: 
+Developer push → GitHub Actions → Docker build → ECR push → ECS deployment
 
 Deployment pipeline:
 
@@ -104,10 +116,10 @@ Deployment pipeline:
 7. The service is redeployed behind the Application Load Balancer
 
 This approach ensures:
-
-- Secure authentication with short-lived credentials
+- Secure authentication using short-lived credentials (OIDC)
 - Fully automated deployments
 - Immutable container releases
+- No stored AWS access keys
 
 ---
 ## Security Design
@@ -167,6 +179,15 @@ The Gatus platform monitors several endpoints:
 | DNS Query         | Infrastructure DNS validation |
 | Domain Expiration | Domain expiry monitoring      |
 ---
+## What I Learned
+
+- Designing secure AWS architectures using private subnets
+- Managing Terraform state remotely with S3 and DynamoDB
+- Building CI/CD pipelines with GitHub Actions
+- Deploying containerised applications on ECS Fargate
+- Implementing secure IAM roles with least privilege
+
+--
 ## Future Improvements
 
 - Possible enhancements:
